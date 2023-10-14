@@ -20,7 +20,7 @@ buttonPlay.addEventListener("click", function() {
 buttonNumber.addEventListener("click", function() {
 	claimNumber();
 	console.log(number);
-    if (Number.isInteger(number) || (number < 1 && number > 49)) {
+    if (Number.isInteger(number) && (number > 0 && number < 50)) {
         player1.style.display = "none";
         player2.style.display = "block";
 		document.getElementById("number").value = ""
@@ -35,15 +35,15 @@ function claimNumber() {
 }
 
 buttonGuess.addEventListener("click", function() {
-    if (!number) {
-        alert("There isn't a number to guess. Put it in the first input.")
-    } else {
-        clickCount += 1;
+	if (Number.isInteger(guess) && (number > min && number < max)) {
+		clickCount += 1;
         claimGuess();
-        document.getElementById("guess").value = "";
-        gamePlay();
-        buttonGuess.textContent = "Attempts: " + clickCount;
-    }
+		gamePlay();
+		buttonGuess.textContent = "Attempts: " + clickCount;
+	} else {
+		alert("Please guess an integer in the given range.");
+	}
+    document.getElementById("guess").value = "";
 })
 
 function claimGuess() {
