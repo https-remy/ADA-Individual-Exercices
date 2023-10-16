@@ -31,13 +31,13 @@ buttonNumber.addEventListener("click", function() {
 })
 
 function claimNumber() {
-	number = parseInt(document.getElementById("number").value);
+	number = parseFloat(document.getElementById("number").value);
 }
 
 buttonGuess.addEventListener("click", function() {
-	if (Number.isInteger(guess) && (number > min && number < max)) {
+	claimGuess();
+	if (Number.isInteger(guess) && (guess > min && guess < max)) {
 		clickCount += 1;
-        claimGuess();
 		gamePlay();
 		buttonGuess.textContent = "Attempts: " + clickCount;
 	} else {
@@ -47,7 +47,7 @@ buttonGuess.addEventListener("click", function() {
 })
 
 function claimGuess() {
-	guess = parseInt(document.getElementById("guess").value);
+	guess = parseFloat(document.getElementById("guess").value);
 	console.log("Guess number --> " + guess);
 }
 
