@@ -24,7 +24,17 @@ const latinToMorse = {
 	'W':'.--',
 	'X':'-..-',
 	'Y':'-.--',
-	'Z':'--..'
+	'Z':'--..',
+	'0': '-----',
+	'1': '.----',
+	'2': '..---',
+	'3': '...--',
+	'4': '....-',
+	'5': '.....',
+	'6': '-....',
+	'7': '--...',
+	'8': '---..',
+	'9': '----.'
 }
 
 const morseToLatin = {
@@ -53,7 +63,17 @@ const morseToLatin = {
 	'..-.': "F",
 	'...': "S",
 	'...-': "V",
-	'....': "H"
+	'....': "H",
+	'-----': '0',
+	'.----': '1',
+	'..---': '2',
+	'...--': '3',
+	'....-': '4',
+	'.....': '5',
+	'-....': '6',
+	'--...': '7',
+	'---..': '8',
+	'----.': '9',
   }
 
 var buttonMorse = document.getElementById("buttonMorse");
@@ -66,7 +86,11 @@ var translatedMorse;
 
 //Encode une chaîne de caractère en morse
 function getLatinCharList(s1) {
-	return s1.split("");
+	return s1.toUpperCase().split("");
+}
+
+function getLatinWordList(s2) {
+	return s2.split(' ');
 }
 
 function translateLatinChar(char) {
@@ -74,10 +98,19 @@ function translateLatinChar(char) {
 }
 
 function encode(string) {
-	let splitedLatinString = getLatinCharList(string);
+	let wordLatinString = getLatinWordList(string);
 	let res = "";
-	for(var i = 0; i < splitedLatinString.length; i++) {
-		res += translateLatinChar(splitedLatinString[i]);
+	for(var j = 0; j < wordLatinString.length; j++) {
+		let splitWordLatin = getLatinCharList(wordLatinString[j]);
+		for(var i = 0; i < splitWordLatin.length; i++) {
+			res += translateLatinChar(splitWordLatin[i]);
+			if(splitWordLatin[i+1] != null) {
+				res += " "
+			}
+		}
+		if(wordLatinString[j+1] != null) {
+			res += "/";
+		}
 	}
 	return res
 }
