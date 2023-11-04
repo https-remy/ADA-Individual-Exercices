@@ -1,4 +1,4 @@
-const latinToMorse = {
+ const latinToMorse = {
 	'A':'.-',
 	'B':'-...',
 	'C':'-.-.',
@@ -76,8 +76,14 @@ const morseToLatin = {
 	'----.': '9',
   }
 
+var buttonMenuText = document.getElementById("buttonTextToMorse");
+var buttonMenuMorse = document.getElementById("buttonMorseToText");
 var buttonMorse = document.getElementById("buttonMorse");
 var buttonText = document.getElementById("buttonText");
+var buttonGoToMenu1 = document.getElementById("goToMenu1");
+var buttonGoToMenu2 = document.getElementById("goToMenu2");
+var buttonReverse1 = document.getElementById("reverse1");
+var buttonReverse2 = document.getElementById("reverse2");
 var text;
 var translatedText;
 var morse;
@@ -152,9 +158,11 @@ function claimText() {
 
 buttonText.addEventListener("click", function() {
 	claimText();
-	translatedText = encode(text);
-	document.getElementById("textToTranslate").value = "";
-	alert(translatedText);
+	if(text) {
+		translatedText = encode(text);
+		document.getElementById("textToTranslate").value = "";
+		alert(translatedText);
+	}
 })
 
 
@@ -164,7 +172,40 @@ function claimMorse() {
 
 buttonMorse.addEventListener("click", function() {
 	claimMorse();
-	translatedMorse = decode(morse);
-	document.getElementById("morseToTranslate").value = "";
-	alert(translatedMorse);
+	if(morse) {
+		translatedMorse = decode(morse);
+		document.getElementById("morseToTranslate").value = "";
+		alert(translatedMorse);
+	}
 })
+
+buttonMenuText.addEventListener("click", function() {
+	menu.style.display = "none";
+	textToMorse.style.display = "block";
+})
+
+buttonMenuMorse.addEventListener("click", function() {
+	menu.style.display = "none";
+	morseToText.style.display = "block";
+})
+
+buttonReverse1.addEventListener("click", function() {
+	textToMorse.style.display = "none";
+	morseToText.style.display = "block";
+})
+
+buttonReverse2.addEventListener("click", function() {
+	morseToText.style.display = "none";
+	textToMorse.style.display = "block";
+})
+
+buttonGoToMenu1.addEventListener("click", function() {
+	textToMorse.style.display = "none";
+	menu.style.display = "block";
+})
+
+buttonGoToMenu2.addEventListener("click", function() {
+	morseToText.style.display = "none";
+	menu.style.display = "block";
+})
+
